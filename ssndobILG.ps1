@@ -24,6 +24,9 @@ if ($mvw){
     $zDOBfirstfour = $zDOB.SubString(0,4)
     $zDOBlastfour  =  $zDOB.SubString(4).contains("1920")
     $zDOBlastfour1  =  $zDOB.SubString(4).contains("1900")
+    $member = (Get-ADGroup $group -server "ad.mvwcorp.com" -Properties Member |  Select-Object -ExpandProperty Member)
+    $memberuser = (Get-ADUser -server "ad.mvwcorp.com" -Identity $user)
+    $furloughed = ($member -contains $memberuser)
 
 
     write-host ""
@@ -40,6 +43,7 @@ if ($mvw){
     write-host "  Other Mobile      :    " $otherMobile
     write-host "       Company      :    " $zContractorCompany
     write-host ""
+    If($furloughed){write-host "                          User is furloughed `r`n"}
 	}
 else{
 	#ilg script starts here
@@ -55,7 +59,9 @@ else{
 	$Company = Get-ADUser -Server "ilg.ad" -identity $user -Properties Company | Select -expand Company
 	$ManagerFull = Get-ADUser -Server "ilg.ad" -identity $user -Properties Manager| Select -expand Manager
 	$Manager = Get-ADUser -Server "ilg.ad" -identity $ManagerFull -properties DisplayName | Select -expand DisplayName
-
+	$member = (Get-ADGroup $group -server "ilg.ad" -Properties Member |  Select-Object -ExpandProperty Member)
+    $memberuser = (Get-ADUser -server "ilg.ad" -Identity $user)
+    $furloughed = ($member -contains $memberuser)
 
 	
 	write-host ""
@@ -68,6 +74,7 @@ else{
 	write-host "    Last Login      :    " $lastlogonfriendly
 	write-host "       Company      :    " $Company
 	write-host ""
+    If($furloughed){write-host "                          User is furloughed `r`n"}
 	}
 	
 	catch{
@@ -82,6 +89,9 @@ else{
 		$Company = Get-ADUser -Server "vri.ilg.ad" -identity $user -Properties Company | Select -expand Company
 		$ManagerFull = Get-ADUser -Server "vri.ilg.ad" -identity $user -Properties Manager| Select -expand Manager
 		$Manager = Get-ADUser -Server "vri.ilg.ad" -identity $ManagerFull -properties DisplayName | Select -expand DisplayName
+	    $member = (Get-ADGroup $group -server "vri.ilg.ad" -Properties Member |  Select-Object -ExpandProperty Member)
+        $memberuser = (Get-ADUser -server "vri.ilg.ad" -Identity $user)
+        $furloughed = ($member -contains $memberuser)
 
 	
 		write-host ""
@@ -94,6 +104,7 @@ else{
 		write-host "    Last Login      :    " $lastlogonfriendly
 		write-host "       Company      :    " $Company
 		write-host ""
+        If($furloughed){write-host "                          User is furloughed `r`n"}
 		}
 		
 		#not ilg or vri
@@ -113,6 +124,9 @@ else{
 			$zDOBfirstfour = $zDOB.SubString(0,4)
 			$zDOBlastfour  =  $zDOB.SubString(4).contains("1920")
 			$zDOBlastfour1  =  $zDOB.SubString(4).contains("1900")
+            $member = (Get-ADGroup $group -server "ad.mvwcorp.com" -Properties Member |  Select-Object -ExpandProperty Member)
+            $memberuser = (Get-ADUser -server "ad.mvwcorp.com" -Identity $user)
+            $furloughed = ($member -contains $memberuser)
 
 		
 			write-host ""
@@ -129,6 +143,7 @@ else{
 			write-host "  Other Mobile      :    " $otherMobile
 			write-host "       Company      :    " $zContractorCompany
 			write-host ""
+            If($furloughed){write-host "                          User is furloughed `r`n"}
 		}
     }
 
