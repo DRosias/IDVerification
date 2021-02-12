@@ -190,15 +190,14 @@ else{
 		#if no other domain, assume it's a strangely formatted EID and default back to mvw.
 		Catch{
     			#cls and rewrite input request for a consistent display across the other searches
-                cls
+                	cls
     			write-host "Enter Login:" $user
     			mvwinfopull
-		}
-    }
-
-	
-		
+			}
+	}	
 }
+
+
 $pause = Read-Host 'Press enter to lookup another EID'
 
 #Cleanup
