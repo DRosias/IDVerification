@@ -1,0 +1,54 @@
+ssndobILG v0.9 
+added ILG functionality
+
+ssndobILG v1.0
+added VRI functionality
+fixed bug where strange EID formats weren't pulling from MVW
+
+ssndobILG v1.1
+Refactored code
+added furlough, disable checks
+added attribute checks for 3rd party EID requests
+added no Last Login error catching
+added manager information invalid message
+removed year fields
+
+v1.2
+Added comments about what some things do and why they're there, as well as possible fixes for existing issues. 
+Added proper indentation and moved some blocks of script to be consistent between domain implementations. 
+Removed unneeded line breaks.
+Implemented logic for users that have never logged on to ILG and VRI domains. This was already implemented and working for MVW.
+
+v1.3
+refactored code to allow for easy expansion to other domains. 
+Note that expansion will result in loss of performance for irregular MVW EID formats due to domain access times.
+Applied check to Manager lookup in case of cross domain managers. This was already implemented and working for MVW, but seems to be at least somewhat necessary for VRI/TPI
+
+v1.4
+added partners domain
+re-phrased legacy company to legacy domain for non-mvw domains
+
+v1.4.1
+added employee ID to MVW domains
+added message in case of a user not being found.
+
+v1.5
+added new birthdate field to non-MVW domains.
+corrected line spacing to user not found message.
+added spacing between output lines
+added tpi domain
+
+v1.6
+removed deprecated ilg and vri hardpointed functions
+added pwd last set field
+added pwd expiration check
+removed Other Mobile
+
+v1.7
+added check for partners accounts formatted like EIDs
+
+v1.8
+renamed to IDVerification
+Commented out multi-domain functionality
+commented out SSN information
+Made MVW zDOB field resilient to null values
